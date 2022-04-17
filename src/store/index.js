@@ -2,11 +2,12 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import createSagaMiddleware from "@redux-saga/core";
 import sagas from "./sagas";
 import authReducer from "./auth/slice";
+import galleryReducer from "./gallery/slice";
 
 const sagaMiddleware = createSagaMiddleware();
 
 export default configureStore({
-  reducer: { auth: authReducer },
+  reducer: { auth: authReducer, gallery: galleryReducer },
   middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });
 for (let saga in sagas) {

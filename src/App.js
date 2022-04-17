@@ -4,7 +4,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthenticated } from "./store/auth/selectors";
-import { setIsAuthenticated } from "./store/auth/slice";
+import Home from "./pages/Home";
 
 function App() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -58,7 +58,9 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <PublicRoute exact path='/'></PublicRoute>
+          <Route exact path='/'>
+            <Home />
+          </Route>
         </Switch>
       </div>
     </Router>
