@@ -7,6 +7,7 @@ import { selectIsAuthenticated } from "./store/auth/selectors";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { setIsAuthenticated } from "./store/auth/slice";
+import Register from "./pages/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +67,9 @@ function App() {
           </Route>
           <PublicRoute path='/login'>
             <Login />
+          </PublicRoute>
+          <PublicRoute path='/register'>
+            <Register />
           </PublicRoute>
         </Switch>
       </div>

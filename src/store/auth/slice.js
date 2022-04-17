@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
   login: () => {},
+  register: () => {},
 };
 
 export const authSlice = createSlice({
@@ -21,6 +22,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setIsAuthenticated, login, setLoginErrorMsg } =
+export const { setIsAuthenticated, login, setLoginErrorMsg, register } =
   authSlice.actions;
 export default authSlice.reducer;
