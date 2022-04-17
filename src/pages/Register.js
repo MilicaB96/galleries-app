@@ -108,7 +108,6 @@ function Register() {
           Register
         </button>
       </form>
-      {console.log(userData)}
     </div>
   );
 }

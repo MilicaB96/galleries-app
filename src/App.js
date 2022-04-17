@@ -6,12 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthenticated } from "./store/auth/selectors";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { setIsAuthenticated } from "./store/auth/slice";
+import { logout, setIsAuthenticated } from "./store/auth/slice";
 import Register from "./pages/Register";
 
 function App() {
   const dispatch = useDispatch();
-  dispatch(setIsAuthenticated(Boolean(localStorage.getItem("token"))));
   const isAuthenticated = useSelector(selectIsAuthenticated);
   return (
     <Router>
@@ -54,9 +53,9 @@ function App() {
             )}
             {isAuthenticated && (
               <li className='nav-item'>
-                <Link className='nav-link text-dark' to='/logout'>
+                <button className='btn' onClick={() => dispatch(logout())}>
                   Logout
-                </Link>
+                </button>
               </li>
             )}
           </ul>
