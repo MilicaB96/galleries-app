@@ -5,10 +5,13 @@ import PublicRoute from "./components/PublicRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthenticated } from "./store/auth/selectors";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import { setIsAuthenticated } from "./store/auth/slice";
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(setIsAuthenticated(Boolean(localStorage.getItem("token"))));
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const dispath = useDispatch();
   return (
     <Router>
       <div>
@@ -61,6 +64,9 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
+          <PublicRoute path='/login'>
+            <Login />
+          </PublicRoute>
         </Switch>
       </div>
     </Router>
