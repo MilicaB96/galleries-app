@@ -4,6 +4,7 @@ const middlewareActions = {
   getGalleries: () => {},
   loadMore: () => {},
   getMyGalleries: () => {},
+  getUserGalleries: () => {},
 };
 
 export const gallerySlice = createSlice({
@@ -47,6 +48,7 @@ export const {
   setCurrentPage,
   setSearch,
   getMyGalleries,
+  getUserGalleries,
   reset,
 } = gallerySlice.actions;
 export default gallerySlice.reducer;

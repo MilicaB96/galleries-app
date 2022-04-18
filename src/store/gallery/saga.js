@@ -4,6 +4,7 @@ import {
   addGalleries,
   getGalleries,
   getMyGalleries,
+  getUserGalleries,
   setGalleries,
   setIsHidden,
 } from "./slice";
@@ -31,7 +32,19 @@ function* getMyGalleriesHandler(action) {
   }
 }
 
+function* getUserGalleriesHandler(action) {
+  try {
+    const data = yield call(GalleryService.getUserGalleries, action.payload);
+    if (action.payload.page > 1) yield put(addGalleries(data.data));
+    else yield put(setGalleries(data.data));
+    yield put(setIsHidden(!data.next_page_url));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* watchGallery() {
   yield takeLatest(getGalleries.type, getGalleriesHandler);
   yield takeLatest(getMyGalleries.type, getMyGalleriesHandler);
+  yield takeLatest(getUserGalleries.type, getUserGalleriesHandler);
 }

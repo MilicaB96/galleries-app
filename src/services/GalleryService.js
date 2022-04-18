@@ -18,5 +18,14 @@ class GalleryService extends HttpService {
     });
     return data;
   };
+  getUserGalleries = async ({ page, filter, id }) => {
+    const { data } = await this.client.get(`authors/${id}`, {
+      params: {
+        page,
+        filter,
+      },
+    });
+    return data;
+  };
 }
 export default new GalleryService();

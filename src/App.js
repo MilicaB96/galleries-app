@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import { logout, setIsAuthenticated } from "./store/auth/slice";
 import Register from "./pages/Register";
 import MyGalleries from "./pages/MyGalleries";
+import UserGalleries from "./pages/UserGalleries";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,8 +73,11 @@ function App() {
           <PublicRoute path='/register'>
             <Register />
           </PublicRoute>
-          <PrivateRoute>
+          <PrivateRoute exact path='/my-galleries'>
             <MyGalleries />
+          </PrivateRoute>
+          <PrivateRoute exact path='/authors/:id'>
+            <UserGalleries />
           </PrivateRoute>
         </Switch>
       </div>

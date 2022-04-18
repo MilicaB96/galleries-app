@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSearch } from "../store/gallery/slice";
+import { reset, setSearch } from "../store/gallery/slice";
 function GalleriesFilter({ resetCallback }) {
   const [filter, setFilter] = useState("");
 
@@ -9,6 +9,9 @@ function GalleriesFilter({ resetCallback }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setSearch(filter));
+  };
+  const handleReset = () => {
+    dispatch(reset());
   };
   return (
     <div className='containter-fluit m-3'>
@@ -25,7 +28,7 @@ function GalleriesFilter({ resetCallback }) {
         <button type='submit' className='btn'>
           Filter
         </button>
-        <button className='btn' type='button' onClick={() => resetCallback()}>
+        <button className='btn' type='button' onClick={handleReset}>
           Reset
         </button>
       </form>

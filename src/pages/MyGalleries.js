@@ -20,13 +20,9 @@ function MyGalleries() {
     dispatch(getMyGalleries({ page: currentPage, filter: search }));
   }, [currentPage, search]);
   const galleries = useSelector(selectGalleries);
-  // handleReset function
-  const handleReset = () => {
-    dispatch(getMyGalleries({ page: 1, filter: "" }));
-  };
   return (
     <div>
-      <GalleriesFilter resetCallback={handleReset} />
+      <GalleriesFilter />
       <GalleriesList galleries={galleries} />
     </div>
   );

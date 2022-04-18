@@ -31,7 +31,7 @@ function GalleriesList({ galleries }) {
             <p style={{ fontSize: "1.5em" }}>{gallery.description}</p>
             <span>
               Created by{" "}
-              <Link className='text-dark' to={`/autors/${gallery.user_id}`}>
+              <Link className='text-dark' to={`/authors/${gallery.user_id}`}>
                 {gallery.user.first_name} {gallery.user.last_name}
               </Link>{" "}
               <em>{gallery.created_at}</em>
