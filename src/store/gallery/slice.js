@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const middlewareActions = {
   getGalleries: () => {},
   loadMore: () => {},
+  getMyGalleries: () => {},
 };
 
 export const gallerySlice = createSlice({
@@ -29,6 +30,10 @@ export const gallerySlice = createSlice({
     setSearch: (state, action) => {
       state.search = action.payload;
     },
+    reset: (state) => {
+      state.search = "";
+      state.currentPage = 1;
+    },
     ...middlewareActions,
   },
 });
@@ -41,5 +46,7 @@ export const {
   setIsHidden,
   setCurrentPage,
   setSearch,
+  getMyGalleries,
+  reset,
 } = gallerySlice.actions;
 export default gallerySlice.reducer;

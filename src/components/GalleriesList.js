@@ -1,4 +1,3 @@
-import { produceWithPatches } from "immer";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -35,7 +34,7 @@ function GalleriesList({ galleries }) {
               <Link className='text-dark' to={`/autors/${gallery.user_id}`}>
                 {gallery.user.first_name} {gallery.user.last_name}
               </Link>{" "}
-              <em>{Date(gallery.created_at).toLocaleString()}</em>
+              <em>{gallery.created_at}</em>
             </span>
             <hr />
           </div>

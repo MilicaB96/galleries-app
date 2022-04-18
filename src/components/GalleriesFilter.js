@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSearch } from "../store/gallery/slice";
-function GalleriesFilter() {
+function GalleriesFilter({ resetCallback }) {
   const [filter, setFilter] = useState("");
+
   const dispatch = useDispatch();
+  // handleSubmit function
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setSearch(filter));
@@ -22,6 +24,9 @@ function GalleriesFilter() {
         </div>
         <button type='submit' className='btn'>
           Filter
+        </button>
+        <button className='btn' type='button' onClick={() => resetCallback()}>
+          Reset
         </button>
       </form>
     </div>

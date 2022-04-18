@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { logout, setIsAuthenticated } from "./store/auth/slice";
 import Register from "./pages/Register";
+import MyGalleries from "./pages/MyGalleries";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,9 @@ function App() {
           <PublicRoute path='/register'>
             <Register />
           </PublicRoute>
+          <PrivateRoute>
+            <MyGalleries />
+          </PrivateRoute>
         </Switch>
       </div>
     </Router>
