@@ -1,7 +1,12 @@
 import HttpService from "./HttpService";
 class GalleryService extends HttpService {
-  getAll = async () => {
-    const { data } = await this.client.get("/");
+  getAll = async ({ page, filter }) => {
+    const { data } = await this.client.get("", {
+      params: {
+        page,
+        filter,
+      },
+    });
     return data;
   };
 }

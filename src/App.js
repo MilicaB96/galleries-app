@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 
 function App() {
   const dispatch = useDispatch();
+  dispatch(setIsAuthenticated(Boolean(localStorage.getItem("token"))));
   const isAuthenticated = useSelector(selectIsAuthenticated);
   return (
     <Router>
