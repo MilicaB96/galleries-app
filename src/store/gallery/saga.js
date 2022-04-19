@@ -3,9 +3,11 @@ import GalleryService from "../../services/GalleryService";
 import {
   addGalleries,
   getGalleries,
+  getGallery,
   getMyGalleries,
   getUserGalleries,
   setGalleries,
+  setGallery,
   setIsHidden,
 } from "./slice";
 
@@ -42,9 +44,18 @@ function* getUserGalleriesHandler(action) {
     console.log(error);
   }
 }
+function* getGalleryHandler(action) {
+  try {
+    const data = yield call(GalleryService.getGallery, action.payload);
+    yield put(setGallery(data));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export function* watchGallery() {
   yield takeLatest(getGalleries.type, getGalleriesHandler);
   yield takeLatest(getMyGalleries.type, getMyGalleriesHandler);
   yield takeLatest(getUserGalleries.type, getUserGalleriesHandler);
+  yield takeLatest(getGallery.type, getGalleryHandler);
 }
