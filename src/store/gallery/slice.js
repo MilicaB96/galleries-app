@@ -11,6 +11,7 @@ const middlewareActions = {
   editGallery: () => {},
   deleteGallery: () => {},
   addComment: () => {},
+  removeComment: () => {},
 };
 
 export const gallerySlice = createSlice({
@@ -48,6 +49,11 @@ export const gallerySlice = createSlice({
     },
     addCommentToGallery: (state, action) => {
       state.gallery.comments.push(action.payload);
+    },
+    removeCommentFromGallery: (state, action) => {
+      state.gallery.comments = state.gallery.comments.filter(
+        (comment) => comment.id != action.payload
+      );
     },
     setCurrentPicture: (state, action) => {
       if (action.payload === "prev") {
@@ -94,5 +100,7 @@ export const {
   reset,
   addComment,
   addCommentToGallery,
+  removeComment,
+  removeCommentFromGallery,
 } = gallerySlice.actions;
 export default gallerySlice.reducer;

@@ -103,7 +103,7 @@ function CreateNewGallery() {
     return <Redirect to='/' />;
   }
   return (
-    <div className='container m-3'>
+    <div className='continer m-3'>
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <input

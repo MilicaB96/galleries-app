@@ -11,6 +11,7 @@ import {
   addComment,
   deleteGallery,
   getGallery,
+  removeComment,
   setCurrentPicture,
 } from "../store/gallery/slice";
 function ViewGallery() {
@@ -47,6 +48,7 @@ function ViewGallery() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addComment({ id, content: comment }));
+    setComment("");
   };
   return (
     <div className='containter'>
@@ -130,6 +132,15 @@ function ViewGallery() {
             gallery.comments.map((comment) => (
               <div className='m-3' key={comment.id}>
                 <li className='list-group-item'>
+                  {parseInt(userId) === comment.user_id && (
+                    <button
+                      type='button'
+                      onClick={() => dispatch(removeComment(comment.id))}
+                      className='btn btn-light mb-2'
+                    >
+                      Delete Comment
+                    </button>
+                  )}
                   <p>{comment.content}</p>
                   {comment.user && (
                     <span>
@@ -148,6 +159,7 @@ function ViewGallery() {
               cols='50'
               rows='5'
               required
+              max='1000'
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder='Enter comment...'

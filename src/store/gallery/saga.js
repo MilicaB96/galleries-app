@@ -13,6 +13,8 @@ import {
   getGallery,
   getMyGalleries,
   getUserGalleries,
+  removeComment,
+  removeCommentFromGallery,
   setGalleries,
   setGallery,
   setIsHidden,
@@ -99,6 +101,14 @@ function* addCommentHandler(action) {
     console.log(error);
   }
 }
+function* removeCommentHandler(action) {
+  try {
+    yield call(CommentService.deleteComment, action.payload);
+    yield put(removeCommentFromGallery(action.payload));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export function* watchGallery() {
   yield takeLatest(getGalleries.type, getGalleriesHandler);
@@ -109,4 +119,5 @@ export function* watchGallery() {
   yield takeLatest(editGallery.type, editGalleryHandler);
   yield takeLatest(deleteGallery.type, deleteGalleryHandler);
   yield takeLatest(addComment.type, addCommentHandler);
+  yield takeLatest(removeComment.type, removeCommentHandler);
 }
