@@ -7,7 +7,10 @@ import galleryReducer from "./gallery/slice";
 const sagaMiddleware = createSagaMiddleware();
 
 export default configureStore({
-  reducer: { auth: authReducer, gallery: galleryReducer },
+  reducer: {
+    auth: authReducer,
+    gallery: galleryReducer,
+  },
   middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });
 for (let saga in sagas) {

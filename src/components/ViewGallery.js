@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { selectUserId } from "../store/auth/selectors";
+import { selectIsAuthenticated, selectUserId } from "../store/auth/selectors";
 import {
   selectCurrentPicture,
   selectGallery,
 } from "../store/gallery/selectors";
 import {
+  addComment,
   deleteGallery,
   getGallery,
   setCurrentPicture,
@@ -25,6 +26,8 @@ function ViewGallery() {
   const gallery = useSelector(selectGallery);
   // getting userId
   const userId = useSelector(selectUserId);
+  // getting auth
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   // handleDelete
   const handleDelete = () => {
     const deletePrompt = prompt(
@@ -38,6 +41,12 @@ function ViewGallery() {
         })
       );
     }
+  };
+  const [comment, setComment] = useState("");
+  // handle Submit comment
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addComment({ id, content: comment }));
   };
   return (
     <div className='containter'>
@@ -112,6 +121,43 @@ function ViewGallery() {
           ></span>
           <span className='sr-only'>Next</span>
         </button>
+      </div>
+      {/* comments */}
+      <hr />
+      <div>
+        <ul className='list-group list-group-flush'>
+          {gallery.comments &&
+            gallery.comments.map((comment) => (
+              <div className='m-3' key={comment.id}>
+                <li className='list-group-item'>
+                  <p>{comment.content}</p>
+                  {comment.user && (
+                    <span>
+                      {comment.user.first_name} {comment.user.last_name}
+                    </span>
+                  )}
+                  <span className='ml-2'>{comment.created_at}</span>
+                </li>
+              </div>
+            ))}
+        </ul>
+        {isAuthenticated && (
+          <form className='m-3' onSubmit={handleSubmit}>
+            <textarea
+              name='content'
+              cols='50'
+              rows='5'
+              required
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder='Enter comment...'
+            ></textarea>
+            <br />
+            <button type='submit' className='btn btn-light'>
+              Submit
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
