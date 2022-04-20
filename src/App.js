@@ -6,15 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthenticated } from "./store/auth/selectors";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { logout, setIsAuthenticated } from "./store/auth/slice";
+import { logout, setIsAuthenticated, setUserId } from "./store/auth/slice";
 import Register from "./pages/Register";
 import MyGalleries from "./pages/MyGalleries";
 import UserGalleries from "./pages/UserGalleries";
 import ViewGallery from "./components/ViewGallery";
+import CreateNewGallery from "./pages/CreateNewGallery";
 
 function App() {
   const dispatch = useDispatch();
   dispatch(setIsAuthenticated(Boolean(localStorage.getItem("token"))));
+  dispatch(setUserId(localStorage.getItem("user_id")));
   const isAuthenticated = useSelector(selectIsAuthenticated);
   return (
     <Router>
@@ -82,6 +84,12 @@ function App() {
           </PrivateRoute>
           <PrivateRoute exact path='/galleries/:id'>
             <ViewGallery />
+          </PrivateRoute>
+          <PrivateRoute exact path='/create'>
+            <CreateNewGallery />
+          </PrivateRoute>
+          <PrivateRoute path='/edit-gallery/:id'>
+            <CreateNewGallery />
           </PrivateRoute>
         </Switch>
       </div>

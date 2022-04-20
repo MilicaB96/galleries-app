@@ -11,6 +11,7 @@ export const authSlice = createSlice({
   initialState: {
     isAuthenticated: false,
     loginErrorMsg: "",
+    userId: "",
   },
   reducers: {
     setIsAuthenticated: (state, action) => {
@@ -19,10 +20,19 @@ export const authSlice = createSlice({
     setLoginErrorMsg: (state, action) => {
       state.loginErrorMsg = action.payload;
     },
+    setUserId: (state, action) => {
+      state.userId = action.payload;
+    },
     ...middlewareActions,
   },
 });
 
-export const { setIsAuthenticated, login, setLoginErrorMsg, register, logout } =
-  authSlice.actions;
+export const {
+  setIsAuthenticated,
+  login,
+  setLoginErrorMsg,
+  register,
+  logout,
+  setUserId,
+} = authSlice.actions;
 export default authSlice.reducer;

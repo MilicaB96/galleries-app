@@ -1,22 +1,63 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { selectUserId } from "../store/auth/selectors";
 import {
   selectCurrentPicture,
   selectGallery,
 } from "../store/gallery/selectors";
-import { getGallery, setCurrentPicture } from "../store/gallery/slice";
+import {
+  deleteGallery,
+  getGallery,
+  setCurrentPicture,
+} from "../store/gallery/slice";
 function ViewGallery() {
   const { id } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGallery(id));
+    dispatch(setCurrentPicture(0));
   }, []);
   const currentPicture = useSelector(selectCurrentPicture);
+  // getting Gallery
   const gallery = useSelector(selectGallery);
-  console.log(currentPicture);
+  // getting userId
+  const userId = useSelector(selectUserId);
+  // handleDelete
+  const handleDelete = () => {
+    const deletePrompt = prompt(
+      "Are you sure you want to delete this gallery(Y/N)?"
+    );
+    if (deletePrompt == "Y") {
+      dispatch(
+        deleteGallery({
+          id: id,
+          meta: { onSuccess: () => history.push("/my-galleries") },
+        })
+      );
+    }
+  };
   return (
-    <div>
+    <div className='containter'>
+      {gallery.user_id === parseInt(userId) && (
+        <div className='m-3  text-right'>
+          <button
+            className='btn btn-light'
+            onClick={() => history.push(`/edit-gallery/${id}`)}
+          >
+            Edit
+          </button>
+          <button
+            type='button'
+            className='btn btn-light ml-2'
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        </div>
+      )}
       <h1 className='text-center display-4'>{gallery.name}</h1>
       {gallery && (
         <h2 className='text-center'>
@@ -36,11 +77,16 @@ function ViewGallery() {
         {gallery && (
           <div className='carousel-inner'>
             <div className='carousel-item active '>
-              <img
-                src={gallery.images[currentPicture].image_url}
-                className='d-block w-100'
-                alt='1 slide'
-              />
+              <a
+                href={gallery.images[currentPicture].image_url}
+                target='_blank'
+              >
+                <img
+                  src={gallery.images[currentPicture].image_url}
+                  className='d-block w-100'
+                  alt='1 slide'
+                />
+              </a>
             </div>
           </div>
         )}{" "}

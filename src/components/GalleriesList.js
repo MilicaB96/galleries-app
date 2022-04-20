@@ -12,7 +12,7 @@ function GalleriesList({ galleries }) {
         galleries.map((gallery, index) => (
           <div key={index}>
             <h1>
-              <Link className='text-dark' to={`galleries/${gallery.id}`}>
+              <Link className='text-dark' to={`/galleries/${gallery.id}`}>
                 {gallery.name}
               </Link>
             </h1>
@@ -23,9 +23,7 @@ function GalleriesList({ galleries }) {
                 height: "300px",
                 objectFit: "cover",
               }}
-              src={
-                gallery.images.filter((image) => image.order === 1)[0].image_url
-              }
+              src={gallery.images[0].image_url}
               alt='picture'
             />
             <p style={{ fontSize: "1.5em" }}>{gallery.description}</p>

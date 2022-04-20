@@ -6,6 +6,7 @@ import {
   register,
   setIsAuthenticated,
   setLoginErrorMsg,
+  setUserId,
 } from "./slice";
 
 function* loginHandler(action) {
@@ -30,6 +31,7 @@ function* logoutHandler() {
   try {
     yield call(AuthService.logout);
     yield put(setIsAuthenticated(false));
+    yield put(setUserId(""));
   } catch (error) {
     console.log(error);
   }
