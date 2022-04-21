@@ -19,8 +19,8 @@ function GalleriesList({ galleries }) {
             <img
               className='rounded mx-auto d-block'
               style={{
-                width: "200px",
-                height: "300px",
+                width: "500px",
+                height: "400px",
                 objectFit: "cover",
               }}
               src={gallery.images[0].image_url}

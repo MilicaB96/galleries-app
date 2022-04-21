@@ -62,7 +62,7 @@ function App() {
             {isAuthenticated && (
               <li className='nav-item'>
                 <Link className='nav-link text-dark' to='/create'>
-                  Create new Gallery
+                  Create New Gallery
                 </Link>
               </li>
             )}

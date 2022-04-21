@@ -32,9 +32,10 @@ function ViewGallery() {
   // handleDelete
   const handleDelete = () => {
     const deletePrompt = prompt(
-      "Are you sure you want to delete this gallery(Y/N)?"
+      "Are you sure you want to delete this gallery(Y/N)?",
+      "Y"
     );
-    if (deletePrompt == "Y") {
+    if (deletePrompt.toLowerCase() === "y") {
       dispatch(
         deleteGallery({
           id: id,
