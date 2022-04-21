@@ -10,9 +10,9 @@ const middlewareActions = {
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isAuthenticated: false,
+    isAuthenticated: !!localStorage.getItem("token"),
     loginErrorMsg: "",
-    user: "",
+    user: null,
   },
   reducers: {
     setIsAuthenticated: (state, action) => {

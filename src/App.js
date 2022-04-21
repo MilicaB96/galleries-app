@@ -6,12 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthenticated } from "./store/auth/selectors";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import {
-  getMyProfile,
-  logout,
-  setIsAuthenticated,
-  setUser,
-} from "./store/auth/slice";
+import { getMyProfile, logout, setUser } from "./store/auth/slice";
 import Register from "./pages/Register";
 import MyGalleries from "./pages/MyGalleries";
 import UserGalleries from "./pages/UserGalleries";
@@ -21,7 +16,6 @@ import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
-  dispatch(setIsAuthenticated(Boolean(localStorage.getItem("token"))));
   const isAuthenticated = useSelector(selectIsAuthenticated);
   useEffect(() => {
     if (isAuthenticated) dispatch(getMyProfile());

@@ -19,8 +19,15 @@ function CreateNewGallery() {
   useEffect(() => {
     if (id) {
       dispatch(getGallery(id));
+    } else {
+      setGallery({
+        name: "",
+        description: "",
+        images: [],
+      });
+      setImageList([{ image_url: "" }]);
     }
-  }, []);
+  }, [id]);
   const fetchedGallery = useSelector(selectGallery);
   useEffect(() => {
     if (id) {
