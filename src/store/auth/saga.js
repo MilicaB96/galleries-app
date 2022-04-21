@@ -7,6 +7,7 @@ import {
   register,
   setIsAuthenticated,
   setLoginErrorMsg,
+  setRegisterErrorMsg,
   setUser,
 } from "./slice";
 
@@ -24,7 +25,7 @@ function* registerHandler(action) {
     yield call(AuthService.register, action.payload);
     yield put(setIsAuthenticated(true));
   } catch (error) {
-    console.log(error.response.data.errors);
+    yield put(setRegisterErrorMsg(error.response.data.errors));
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRegisterErrorMsg } from "../store/auth/selectors";
 import { register } from "../store/auth/slice";
 function Register() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ function Register() {
     e.preventDefault();
     dispatch(register(userData));
   };
+  // get register errors
+  const error = useSelector(selectRegisterErrorMsg);
   return (
     <div className='containter m-3 text-center'>
       <form onSubmit={handleSubmit}>
@@ -30,6 +33,9 @@ function Register() {
               setUserData({ ...userData, first_name: e.target.value })
             }
           />
+          {error["first_name"] && (
+            <div className='text-danger'>{error["first_name"]}</div>
+          )}
         </div>
         <div className='form-group'>
           <input
@@ -42,6 +48,9 @@ function Register() {
               setUserData({ ...userData, last_name: e.target.value })
             }
           />
+          {error["last_name"] && (
+            <div className='text-danger'>{error["last_name"]}</div>
+          )}
         </div>
         <div className='form-group'>
           <input
@@ -54,6 +63,9 @@ function Register() {
               setUserData({ ...userData, email: e.target.value })
             }
           />
+          {error["email"] && (
+            <div className='text-danger'>{error["email"]}</div>
+          )}
         </div>
         <div className='form-group'>
           <input
@@ -69,6 +81,9 @@ function Register() {
               setUserData({ ...userData, password: e.target.value })
             }
           />
+          {error["password"] && (
+            <div className='text-danger'>{error["password"]}</div>
+          )}
         </div>
         <div className='form-group'>
           <input
@@ -84,6 +99,9 @@ function Register() {
               })
             }
           />
+          {error["password_confirmation"] && (
+            <div className='text-danger'>{error["password_confirmation"]}</div>
+          )}
         </div>
         <div className='form-group form-check'>
           <input
@@ -107,6 +125,9 @@ function Register() {
         <button type='submit' className='btn btn-light'>
           Register
         </button>
+        {error["terms_and_conditions"] && (
+          <div className='text-danger'>{error["terms_and_conditions"]}</div>
+        )}
       </form>
     </div>
   );

@@ -4,3 +4,6 @@ export const selectIsHidden = (state) => state.gallery.isHidden;
 export const selectSearch = (state) => state.gallery.search;
 export const selectGallery = (state) => state.gallery.gallery;
 export const selectCurrentPicture = (state) => state.gallery.currentPicture;
+export const selectCreateErrorMsg = (state) => state.gallery.createErrorMsg;
+export const selectEditErrorMsg = (state) => state.gallery.editErrorMsg;
+export const selectCommentErrorMsg = (state) => state.gallery.commentErrorMsg;

@@ -23,6 +23,9 @@ export const gallerySlice = createSlice({
     search: "",
     gallery: "",
     currentPicture: 0,
+    createErrorMsg: {},
+    editErrorMsg: {},
+    commentErrorMsg: {},
   },
   reducers: {
     setGalleries: (state, action) => {
@@ -76,6 +79,15 @@ export const gallerySlice = createSlice({
     addGallery: (state, action) => {
       state.galleries = action.payload;
     },
+    setCreateErrorMsg: (state, action) => {
+      state.createErrorMsg = action.payload;
+    },
+    setEditErrorMsg: (state, action) => {
+      state.editErrorMsg = action.payload;
+    },
+    setCommentErrorMsg: (state, action) => {
+      state.commentErrorMsg = action.payload;
+    },
     ...middlewareActions,
   },
 });
@@ -102,5 +114,8 @@ export const {
   addCommentToGallery,
   removeComment,
   removeCommentFromGallery,
+  setCreateErrorMsg,
+  setEditErrorMsg,
+  setCommentErrorMsg,
 } = gallerySlice.actions;
 export default gallerySlice.reducer;

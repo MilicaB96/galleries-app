@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import { selectUserId } from "../store/auth/selectors";
-import { selectGallery } from "../store/gallery/selectors";
+import {
+  selectCreateErrorMsg,
+  selectEditErrorMsg,
+  selectGallery,
+} from "../store/gallery/selectors";
 import { createGallery, editGallery, getGallery } from "../store/gallery/slice";
 function CreateNewGallery() {
   const dispatch = useDispatch();
@@ -15,6 +19,9 @@ function CreateNewGallery() {
     description: "",
     images: [],
   });
+  // getting error messages
+  const errorCreate = useSelector(selectCreateErrorMsg);
+  const errorEdit = useSelector(selectEditErrorMsg);
   // on edit put all the existing values in input fields
   useEffect(() => {
     if (id) {
@@ -107,7 +114,6 @@ function CreateNewGallery() {
   if (id && fetchedGallery && fetchedGallery.user_id !== parseInt(userId)) {
     return <Redirect to='/' />;
   }
-
   return (
     <div className='continer m-3'>
       <form onSubmit={handleSubmit}>
@@ -123,6 +129,12 @@ function CreateNewGallery() {
             className='form-control'
             onChange={(e) => setGallery({ ...gallery, name: e.target.value })}
           />
+          {errorCreate["name"] && (
+            <div className='text-danger'>{errorCreate["name"]}</div>
+          )}
+          {errorEdit["name"] && (
+            <div className='text-danger'>{errorEdit["name"]}</div>
+          )}
         </div>
         <div className='form-group'>
           <input
@@ -136,6 +148,12 @@ function CreateNewGallery() {
               setGallery({ ...gallery, description: e.target.value })
             }
           />
+          {errorCreate["description"] && (
+            <div className='text-danger'>{errorCreate["description"]}</div>
+          )}
+          {errorEdit["description"] && (
+            <div className='text-danger'>{errorEdit["description"]}</div>
+          )}
         </div>
 
         {imageList &&
@@ -150,6 +168,20 @@ function CreateNewGallery() {
                   className='form-control'
                   onChange={(e) => editImageUrl(image, e.target.value)}
                 />
+                {errorCreate[`images.${index}.image_url`] && (
+                  <div className='text-danger'>
+                    {errorCreate[`images.${index}.image_url`].map((error) => (
+                      <p>{error}</p>
+                    ))}
+                  </div>
+                )}
+                {errorEdit[`images.${index}.image_url`] && (
+                  <div className='text-danger'>
+                    {errorEdit[`images.${index}.image_url`].map((error) => (
+                      <p>{error}</p>
+                    ))}
+                  </div>
+                )}
               </div>
               {imageList.length > 1 && (
                 <div className='d-inline-block'>

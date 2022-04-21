@@ -32,7 +32,7 @@ function GalleriesList({ galleries }) {
               <Link className='text-dark' to={`/authors/${gallery.user_id}`}>
                 {gallery.user.first_name} {gallery.user.last_name}
               </Link>{" "}
-              <em>{gallery.created_at}</em>
+              <em>{new Date(gallery.created_at).toLocaleString()}</em>
             </span>
             <hr />
           </div>

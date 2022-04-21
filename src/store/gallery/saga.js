@@ -15,6 +15,9 @@ import {
   getUserGalleries,
   removeComment,
   removeCommentFromGallery,
+  setCommentErrorMsg,
+  setCreateErrorMsg,
+  setEditErrorMsg,
   setGalleries,
   setGallery,
   setIsHidden,
@@ -72,8 +75,9 @@ function* createGalleryHandler(action) {
     if (action.payload.meta) {
       yield call(action.payload.meta.onSuccess);
     }
+    yield put(setCreateErrorMsg({}));
   } catch (error) {
-    console.log(error.response);
+    yield put(setCreateErrorMsg(error.response.data.errors));
   }
 }
 
@@ -83,8 +87,9 @@ function* editGalleryHandler(action) {
     if (action.payload.meta.onSuccess) {
       yield call(action.payload.meta.onSuccess);
     }
+    yield put(setEditErrorMsg({}));
   } catch (error) {
-    console.log(error);
+    yield put(setEditErrorMsg(error.response.data.errors));
   }
 }
 function* deleteGalleryHandler(action) {
@@ -97,8 +102,10 @@ function* addCommentHandler(action) {
   try {
     const data = yield call(CommentService.createComment, action.payload);
     yield put(addCommentToGallery(data));
+    yield put(setCommentErrorMsg({}));
   } catch (error) {
     console.log(error);
+    yield put(setCommentErrorMsg(error.response.data.errors));
   }
 }
 function* removeCommentHandler(action) {

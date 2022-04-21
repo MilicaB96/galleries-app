@@ -13,6 +13,7 @@ export const authSlice = createSlice({
     isAuthenticated: !!localStorage.getItem("token"),
     loginErrorMsg: "",
     user: null,
+    registerErrosMsg: {},
   },
   reducers: {
     setIsAuthenticated: (state, action) => {
@@ -23,6 +24,9 @@ export const authSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload;
+    },
+    setRegisterErrorMsg: (state, action) => {
+      state.registerErrosMsg = action.payload;
     },
     ...middlewareActions,
   },
@@ -36,5 +40,6 @@ export const {
   logout,
   setUser,
   getMyProfile,
+  setRegisterErrorMsg,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { selectIsAuthenticated, selectUserId } from "../store/auth/selectors";
 import {
+  selectCommentErrorMsg,
   selectCurrentPicture,
   selectGallery,
 } from "../store/gallery/selectors";
@@ -45,6 +46,8 @@ function ViewGallery() {
     }
   };
   const [comment, setComment] = useState("");
+  // get comment errors
+  const error = useSelector(selectCommentErrorMsg);
   // handle Submit comment
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,7 +79,7 @@ function ViewGallery() {
           <Link to={`/authors/${gallery.user_id}`}>
             {gallery.user.first_name} {gallery.user.last_name}
           </Link>{" "}
-          {gallery.created_at}
+          {new Date(gallery.created_at).toLocaleString()}
         </h2>
       )}
       <p className='text-center'>{gallery.description}</p>
@@ -148,7 +151,9 @@ function ViewGallery() {
                       {comment.user.first_name} {comment.user.last_name}
                     </span>
                   )}
-                  <span className='ml-2'>{comment.created_at}</span>
+                  <span className='ml-2'>
+                    {new Date(comment.created_at).toLocaleString()}
+                  </span>
                 </li>
               </div>
             ))}
@@ -165,6 +170,9 @@ function ViewGallery() {
               onChange={(e) => setComment(e.target.value)}
               placeholder='Enter comment...'
             ></textarea>
+            {error["content"] && (
+              <div className='text-danger'>{error["content"]}</div>
+            )}
             <br />
             <button type='submit' className='btn btn-light'>
               Submit
