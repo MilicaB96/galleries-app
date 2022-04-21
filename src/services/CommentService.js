@@ -5,7 +5,7 @@ class CommentService extends HttpService {
     return data;
   };
   deleteComment = async (id) => {
-    const { data } = await this.client.delete(`/comments/delete/${id}`);
+    const { data } = await this.client.delete(`/comments/${id}`);
     return data;
   };
 }

@@ -79,7 +79,7 @@ function ViewGallery() {
           <Link to={`/authors/${gallery.user_id}`}>
             {gallery.user.first_name} {gallery.user.last_name}
           </Link>{" "}
-          {new Date(gallery.created_at).toLocaleString()}
+          {new Date(gallery.created_at).toLocaleString}
         </h2>
       )}
       <p className='text-center'>{gallery.description}</p>
@@ -87,6 +87,7 @@ function ViewGallery() {
       <div
         id='carouselExampleControls'
         className='carousel slide'
+        style={{ background: "#d9d9d9" }}
         data-ride='carousel'
       >
         {gallery && (
@@ -98,7 +99,8 @@ function ViewGallery() {
               >
                 <img
                   src={gallery.images[currentPicture].image_url}
-                  className='d-block w-100'
+                  className='d-block mx-auto'
+                  style={{ width: "50%", height: "30%" }}
                   alt='1 slide'
                 />
               </a>
@@ -112,7 +114,7 @@ function ViewGallery() {
         >
           <span
             className='carousel-control-prev-icon'
-            // aria-hidden='true'
+            aria-hidden='true'
           ></span>
           <span className='sr-only'>Previous</span>
         </button>
