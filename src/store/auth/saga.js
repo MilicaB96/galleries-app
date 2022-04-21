@@ -1,12 +1,13 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import AuthService from "../../services/AuthService";
 import {
+  getMyProfile,
   login,
   logout,
   register,
   setIsAuthenticated,
   setLoginErrorMsg,
-  setUserId,
+  setUser,
 } from "./slice";
 
 function* loginHandler(action) {
@@ -31,7 +32,14 @@ function* logoutHandler() {
   try {
     yield call(AuthService.logout);
     yield put(setIsAuthenticated(false));
-    yield put(setUserId(""));
+  } catch (error) {
+    console.log(error);
+  }
+}
+function* getMyProfileHandler() {
+  try {
+    const data = yield call(AuthService.getMyProfile);
+    yield put(setUser(data));
   } catch (error) {
     console.log(error);
   }
@@ -41,4 +49,5 @@ export function* watchAuth() {
   yield takeLatest(login.type, loginHandler);
   yield takeLatest(register.type, registerHandler);
   yield takeLatest(logout.type, logoutHandler);
+  yield takeLatest(getMyProfile.type, getMyProfileHandler);
 }

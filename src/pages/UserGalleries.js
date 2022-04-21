@@ -16,6 +16,7 @@ function UserGalleries() {
   const currentPage = useSelector(selectCurrentPage);
   const search = useSelector(selectSearch);
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(reset());
     dispatch(getUserGalleries({ id }));
   }, []);

@@ -6,18 +6,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthenticated } from "./store/auth/selectors";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { logout, setIsAuthenticated, setUserId } from "./store/auth/slice";
+import {
+  getMyProfile,
+  logout,
+  setIsAuthenticated,
+  setUser,
+} from "./store/auth/slice";
 import Register from "./pages/Register";
 import MyGalleries from "./pages/MyGalleries";
 import UserGalleries from "./pages/UserGalleries";
 import ViewGallery from "./components/ViewGallery";
 import CreateNewGallery from "./pages/CreateNewGallery";
+import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
   dispatch(setIsAuthenticated(Boolean(localStorage.getItem("token"))));
-  dispatch(setUserId(localStorage.getItem("user_id")));
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  useEffect(() => {
+    if (isAuthenticated) dispatch(getMyProfile());
+    else dispatch(setUser(""));
+  }, [isAuthenticated]);
   return (
     <Router>
       <div>

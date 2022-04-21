@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
-import GalleriesFilter from "../components/GalleriesFilter";
 import { selectUserId } from "../store/auth/selectors";
 import { selectGallery } from "../store/gallery/selectors";
 import { createGallery, editGallery, getGallery } from "../store/gallery/slice";
@@ -23,7 +22,6 @@ function CreateNewGallery() {
     }
   }, []);
   const fetchedGallery = useSelector(selectGallery);
-
   useEffect(() => {
     if (id) {
       setGallery({
@@ -102,6 +100,7 @@ function CreateNewGallery() {
   if (id && fetchedGallery && fetchedGallery.user_id !== parseInt(userId)) {
     return <Redirect to='/' />;
   }
+
   return (
     <div className='continer m-3'>
       <form onSubmit={handleSubmit}>
