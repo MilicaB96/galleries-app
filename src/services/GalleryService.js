@@ -32,15 +32,15 @@ class GalleryService extends HttpService {
     return data;
   };
   createGallery = async (gallery) => {
-    const { data } = await this.client.post("/create", gallery);
+    const { data } = await this.client.post("/galleries", gallery);
     return data;
   };
   editGallery = async ({ id, gallery }) => {
-    const { data } = await this.client.post(`/edit/${id}`, gallery);
+    const { data } = await this.client.put(`/galleries/${id}`, gallery);
     return data;
   };
   deleteGallery = async (id) => {
-    const { data } = await this.client.post(`delete/${id}`);
+    const { data } = await this.client.delete(`galleries/${id}`);
     return data;
   };
 }

@@ -178,7 +178,7 @@ function CreateNewGallery() {
         <button
           type='button'
           onClick={() => {
-            setImageList([...imageList, { image_url: "", order: "" }]);
+            setImageList([...imageList, { image_url: "" }]);
           }}
           className='mb-3 d-block btn btn-light'
         >

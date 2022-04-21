@@ -79,12 +79,12 @@ function App() {
           <PrivateRoute exact path='/my-galleries'>
             <MyGalleries />
           </PrivateRoute>
-          <PrivateRoute exact path='/authors/:id'>
+          <Route exact path='/authors/:id'>
             <UserGalleries />
-          </PrivateRoute>
-          <PrivateRoute exact path='/galleries/:id'>
+          </Route>
+          <Route exact path='/galleries/:id'>
             <ViewGallery />
-          </PrivateRoute>
+          </Route>
           <PrivateRoute exact path='/create'>
             <CreateNewGallery />
           </PrivateRoute>
