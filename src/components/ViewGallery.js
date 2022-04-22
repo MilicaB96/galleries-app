@@ -100,7 +100,11 @@ function ViewGallery() {
                 <img
                   src={gallery.images[currentPicture].image_url}
                   className='d-block mx-auto'
-                  style={{ width: "50%", height: "30%" }}
+                  style={{
+                    width: "1000px",
+                    height: "700px",
+                    objectFit: "cover",
+                  }}
                   alt='1 slide'
                 />
               </a>
@@ -150,7 +154,12 @@ function ViewGallery() {
                   <p>{comment.content}</p>
                   {comment.user && (
                     <span>
-                      {comment.user.first_name} {comment.user.last_name}
+                      <Link
+                        to={`/authors/${comment.user_id}`}
+                        className='text-dark'
+                      >
+                        {comment.user.first_name} {comment.user.last_name}
+                      </Link>
                     </span>
                   )}
                   <span className='ml-2'>

@@ -10,8 +10,10 @@ function GalleriesFilter({ resetCallback }) {
     e.preventDefault();
     dispatch(setSearch(filter));
   };
+  // removes filter
   const handleReset = () => {
     dispatch(reset());
+    setFilter("");
   };
   return (
     <div className='containter-fluit m-3'>
