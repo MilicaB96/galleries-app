@@ -45,6 +45,15 @@ function ViewGallery() {
       );
     }
   };
+  const handleDeleteComment = (id) => {
+    const deleteCommentPropmpt = prompt(
+      "Are you sure you want to delete this comment(Y/N)?",
+      "Y"
+    );
+    if (deleteCommentPropmpt.toLowerCase() === "y") {
+      dispatch(removeComment(id));
+    }
+  };
   const [comment, setComment] = useState("");
   // get comment errors
   const error = useSelector(selectCommentErrorMsg);
@@ -145,10 +154,10 @@ function ViewGallery() {
                   {parseInt(userId) === comment.user_id && (
                     <button
                       type='button'
-                      onClick={() => dispatch(removeComment(comment.id))}
+                      onClick={() => handleDeleteComment(comment.id)}
                       className='btn btn-light mb-2'
                     >
-                      Delete Comment
+                      Delete
                     </button>
                   )}
                   <p>{comment.content}</p>

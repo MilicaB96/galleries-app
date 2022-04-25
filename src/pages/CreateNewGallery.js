@@ -109,6 +109,14 @@ function CreateNewGallery() {
     setImageList(newImageList);
     setImageList(newImageList);
   };
+  // handle Cancel
+  const handleCancel = () => {
+    if (id) {
+      history.push(`/galleries/{id}`);
+    } else {
+      history.push("/my-galleries");
+    }
+  };
   // redirect incase of an unauthenticated user
   const userId = useSelector(selectUserId);
   if (id && fetchedGallery && fetchedGallery.user_id !== parseInt(userId)) {
@@ -225,11 +233,7 @@ function CreateNewGallery() {
         <button type='submit' className='btn btn-light mr-3'>
           Submit
         </button>
-        <button
-          type='button'
-          className='btn btn-light'
-          onClick={() => history.push("/my-galleries")}
-        >
+        <button type='button' className='btn btn-light' onClick={handleCancel}>
           Cancel
         </button>
       </form>
